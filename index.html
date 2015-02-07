@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title>Layers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min.js"></script>
+
+    <script src="app.js"></script>
+    
+    <style>
+      .page-header {
+        color: blue;
+      }
+      
+      .group {
+        color: blue;
+        font-weight: 600;
+      }
+      
+      .layer {
+        margin-left: 1.75rem;
+        color: gray;
+      }
+    </style>
+  </head>
+  <body ng-app="dwmLayers" ng-controller="MainCtrl">
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-1">
+
+        <div class="page-header">
+          <h2>Development Web Map Layers</h2>
+          
+          <div class="input-group no-left-margin">
+            <input type="text" class="form-control" ng-model="serviceUrl" placeholder="Search for...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" ng-click="getLayers()">Go!</button>
+            </span>
+          </div>
+        </div>                    
+                
+        <form>
+          <input type="text" ng-model="layerName" placeholder="Type here to search..."/>
+        </form>
+        
+        <div ng-repeat="layer in layers | filter:layerName">
+          <div ng-class="{group: layer.parentLayerId === -1,layer: layer.parentLayerId !== -1}">{{layer.name}}</div>      
+        </div>
+    
+        </div>
+      </div>
+  </body>
+</html>
